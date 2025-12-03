@@ -40,13 +40,57 @@ body::before {
             rgba(0, 243, 255, 0.03) 4px
         );
     pointer-events: none;
-    z-index: 1;
+    z-index: 0; /* lowered so section overlays can show */
     animation: scanlines 8s linear infinite;
 }
 
-@keyframes scanlines {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(20px); }
+/* Hero flow overlay (covers the whole hero and animates) */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1; /* above body overlay but below hero content */
+    background:
+        linear-gradient(90deg, rgba(0,243,255,0.04) 0%, rgba(255,0,128,0.03) 25%, rgba(255,237,78,0.03) 50%, rgba(0,243,255,0.04) 75%, rgba(255,0,128,0.03) 100%),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 243, 255, 0.03) 2px,
+            rgba(0, 243, 255, 0.03) 4px
+        );
+    background-size: 200% 100%, 100% 100%;
+    animation: flow 10s linear infinite, scanlines 8s linear infinite;
+    mix-blend-mode: overlay;
+    opacity: 0.95;
+}
+
+/* Make sure hero content sits above the overlay */
+.hero h1,
+.hero .subtitle,
+.bio {
+    position: relative;
+    z-index: 2;
+}
+
+/* Remove any solid background on terminal lines so the hero overlay flows behind them */
+.terminal-line {
+    background: transparent; /* allow hero flow to show through */
+    border-left: 2px solid rgba(0,243,255,0.18); /* softer line so overlay is visible */
+}
+
+/* Slightly soften the prompt dot so it doesn't block the flow */
+.terminal-line::before {
+    box-shadow: 0 0 8px rgba(0, 243, 255, 0.55);
+    background: rgba(0,243,255,0.9);
+}
+
+/* Flow animation */
+@keyframes flow {
+    0% { background-position: 0% 50%, 0% 0%; }
+    50% { background-position: 100% 50%, 0% 0%; }
+    100% { background-position: 0% 50%, 0% 0%; }
 }
 
 /* Glitch Effect */
@@ -156,21 +200,9 @@ nav a[target="_blank"]::after {
 
 /* Hero Section */
 .hero {
-    padding: 80px 0;
     text-align: center;
+    padding: 100px 20px;
     position: relative;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
-    pointer-events: none;
 }
 
 .hero h1 {
@@ -182,28 +214,144 @@ nav a[target="_blank"]::after {
     animation: glitch 3s infinite;
     text-transform: uppercase;
     letter-spacing: 5px;
+    position: relative;
+    z-index: 1;
 }
 
 .hero .subtitle {
     font-size: 1.5rem;
     color: var(--neon-cyan);
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
 }
 
 .bio {
-    max-width: 700px;
+    max-width: 900px;
     margin: 0 auto;
-    font-size: 1.2rem;
+    text-align: left;
+    position: relative;
+    z-index: 1;
+}
+
+.terminal-line {
+    margin-bottom: 30px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-left: 2px solid rgba(0,243,255,0.18);
+    padding-left: 30px;
+    position: relative;
+    opacity: 0; /* Start hidden */
+}
+
+.terminal-line:nth-child(1) {
+    animation-delay: 0.5s;
+}
+
+.terminal-line:nth-child(2) {
+    animation-delay: 2.5s;
+}
+
+.terminal-line:nth-child(3) {
+    animation-delay: 4.5s;
+}
+
+@keyframes fadeInLine {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.terminal-line::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    top: 20px;
+    width: 10px;
+    height: 10px;
+    background: var(--neon-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--neon-cyan);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+}
+
+.prompt {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-cyan);
+    font-weight: 700;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    text-shadow: 0 0 10px var(--neon-cyan);
+    min-width: 120px;
+}
+
+.terminal-line p {
+    font-size: 1.1rem;
     line-height: 1.8;
     color: var(--text-secondary);
-    padding: 20px;
-    background: rgba(21, 21, 31, 0.5);
-    border: 1px solid var(--neon-cyan);
-    border-radius: 5px;
-    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+    margin: 0;
+    white-space: normal;
 }
+
+/* Remove the old typing animations */
+/* Delete or comment out these rules:
+.terminal-line:nth-child(1) p {
+    animation-delay: 0.5s;
+}
+
+.terminal-line:nth-child(2) p {
+    animation-delay: 2.5s;
+}
+
+.terminal-line:nth-child(3) p {
+    animation-delay: 4.5s;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+*/
+
+/* Keep only the cursor blink animation */
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: var(--neon-cyan);
+    }
+}
+
+/* Remove the typed class styles as they're no longer needed */
+/* Delete or comment out:
+.terminal-line p.typed {
+    border-right: none;
+    white-space: normal;
+}
+*/
 
 /* Section Styles */
 section {

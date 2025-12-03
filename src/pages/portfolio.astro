@@ -38,15 +38,30 @@ const recentPosts = await getPosts(3)
 				<h1>Oyame Mazaleni</h1>
 				<div class='subtitle'>Data Engineer // Developer</div>
 				<div class='bio'>
-					<p>
-						Welcome to Night City's digital frontier. I'm a netrunner navigating through the chaos
-						of code and creativity. Specializing in data engineering, backend development, and cloud
-						infrastructure, I build the systems that power the future.
-					</p>
-					<p>
-						From crafting scalable data pipelines to architecting robust APIs, I transform complex
-						challenges into elegant solutions. Let's jack into the future together.
-					</p>
+					<div class='terminal-line'>
+						<span class='prompt'>~/origin$</span>
+						<p>
+							Township kid turned data engineer. a year in Software Developer trainee, Data Analyst,
+							then Data Engineer intern. Now I build systems that scale—real-time pipelines
+							processing millions of events and APIs handling large requests, and cloud
+							architectures that just work.
+						</p>
+					</div>
+					<div class='terminal-line'>
+						<span class='prompt'>~/mindset$</span>
+						<p>
+							Inspired by Cyberpunk 2077 and Edgerunners, I bring that same street-smart hustle to
+							every project. No shortcuts, no excuses—just clean code, solid infrastructure, and
+							solutions that deliver. From Apache Kafka to AWS, Python to FastAPI, I speak fluent
+							tech across the full stack.
+						</p>
+					</div>
+					<div class='terminal-line'>
+						<span class='prompt'>~/mission$</span>
+						<p class='text-cyber-yellow' style="font-family: 'Orbitron', sans-serif;">
+							The future belongs to those who code it. Let's build yours. 🚀
+						</p>
+					</div>
 				</div>
 			</section>
 
@@ -490,5 +505,93 @@ const recentPosts = await getPosts(3)
 				<p style='color: var(--text-secondary);'>© 2025 Oyame Mazaleni // Built in Night City</p>
 			</footer>
 		</div>
+
+		<script>
+			// @ts-nocheck
+			document.addEventListener('DOMContentLoaded', () => {
+				const terminalLines = document.querySelectorAll('.terminal-line')
+
+				// Store original text
+				const originalTexts = Array.from(terminalLines).map((line) => {
+					const p = line.querySelector('p')
+					return p ? p.textContent : ''
+				})
+
+				// Clear text initially and hide lines
+				terminalLines.forEach((line) => {
+					const p = line.querySelector('p')
+					if (p) {
+						p.textContent = ''
+						p.style.whiteSpace = 'normal'
+						p.style.borderRight = 'none'
+						p.style.animation = 'none'
+					}
+					line.style.opacity = '0'
+				})
+
+				// Typing function with cursor
+				const typeText = (element, text, speed = 25) => {
+					return new Promise((resolve) => {
+						// Show blinking cursor while typing
+						element.style.borderRight = '2px solid var(--neon-cyan)'
+						element.style.animation = 'blink-caret 0.75s step-end infinite'
+
+						let i = 0
+						const interval = setInterval(() => {
+							if (i < text.length) {
+								element.textContent += text.charAt(i)
+								i++
+							} else {
+								clearInterval(interval)
+								// Remove cursor after typing
+								element.style.borderRight = 'none'
+								element.style.animation = 'none'
+								resolve()
+							}
+						}, speed)
+					})
+				}
+
+				// Animate lines sequentially
+				const animateTerminal = async () => {
+					for (let i = 0; i < terminalLines.length; i++) {
+						const line = terminalLines[i]
+						const p = line.querySelector('p')
+
+						if (p && originalTexts[i]) {
+							// Fade in line
+							line.style.animation = 'fadeInLine 0.3s forwards'
+
+							// Wait for fade in
+							await new Promise((resolve) => setTimeout(resolve, 400))
+
+							// Type text
+							await typeText(p, originalTexts[i], 20)
+
+							// Wait before next line
+							await new Promise((resolve) => setTimeout(resolve, 500))
+						}
+					}
+				}
+
+				// Start animation when bio section is in view
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								animateTerminal()
+								observer.unobserve(entry.target)
+							}
+						})
+					},
+					{ threshold: 0.3 }
+				)
+
+				const bioSection = document.querySelector('.bio')
+				if (bioSection) {
+					observer.observe(bioSection)
+				}
+			})
+		</script>
 	</body>
 </html>
