@@ -1,7 +1,17 @@
-export function sluglify(text: string) {
-	return text.replace(/\s+/g, '-')
+import slugify from 'slugify'
+
+export const sluglify = (text: string) => {
+	return slugify(text, {
+		lower: true,
+		strict: true,
+		remove: /[*+~.()'"!:@]/g,
+		replacement: '-'
+	})
 }
 
-export function unsluglify(text: string) {
-	return text.replace(/-/g, ' ')
+export const unsluglify = (slug: string) => {
+	return slug
+		.split('-')
+		.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+		.join(' ')
 }

@@ -1,0 +1,494 @@
+---
+import { getPosts } from '../utils'
+
+const recentPosts = await getPosts(3)
+---
+
+<!doctype html>
+<html lang='en'>
+	<head>
+		<meta charset='UTF-8' />
+		<meta name='viewport' content='width=device-width, initial-scale=1.0' />
+		<title>Netrunner Portfolio</title>
+		<link rel='stylesheet' href='/portfolio/style.css' />
+		<link rel='preconnect' href='https://fonts.googleapis.com' />
+		<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+		<link
+			href='https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap'
+			rel='stylesheet'
+		/>
+		<script src='https://unpkg.com/simple-icons@latest/icons.js'></script>
+	</head>
+	<body>
+		<div class='container'>
+			<header>
+				<nav>
+					<div class='logo'>NR://PORT</div>
+					<ul class='nav-links'>
+						<li><a href='#about'>About</a></li>
+						<li><a href='#pitch'>Pitch</a></li>
+						<li><a href='#skills'>Skills</a></li>
+						<li><a href='#projects'>Projects</a></li>
+						<li><a href='/'>Blog</a></li>
+					</ul>
+				</nav>
+			</header>
+
+			<section id='about' class='hero'>
+				<h1>Oyame Mazaleni</h1>
+				<div class='subtitle'>Data Engineer // Developer</div>
+				<div class='bio'>
+					<p>
+						Welcome to Night City's digital frontier. I'm a netrunner navigating through the chaos
+						of code and creativity. Specializing in data engineering, backend development, and cloud
+						infrastructure, I build the systems that power the future.
+					</p>
+					<p>
+						From crafting scalable data pipelines to architecting robust APIs, I transform complex
+						challenges into elegant solutions. Let's jack into the future together.
+					</p>
+				</div>
+			</section>
+
+			<section id='pitch'>
+				<h2 class='section-title'>// Elevator Pitch</h2>
+				<div class='elevator-pitch'>
+					<div class='video-placeholder'>
+						<div class='video-container'>
+							<div class='scan-effect'></div>
+							<div class='placeholder-content'>
+								<svg
+									class='play-icon'
+									width='80'
+									height='80'
+									viewBox='0 0 80 80'
+									fill='none'
+									xmlns='http://www.w3.org/2000/svg'
+								>
+									<circle cx='40' cy='40' r='38' stroke='var(--neon-cyan)' stroke-width='2'
+									></circle>
+									<polygon points='32,25 32,55 55,40' fill='var(--neon-cyan)'></polygon>
+								</svg>
+								<p class='video-label'>60 SEC TRANSMISSION</p>
+								<p class='video-status'>// AWAITING UPLOAD</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id='skills'>
+				<h2 class='section-title'>// Chrome & Capabilities</h2>
+				<div class='skills-container'>
+					<div class='skill-category'>
+						<h3 class='category-title'>Programming Languages</h3>
+
+						<div class='skill-item'>
+							<div class='skill-header'>
+								<span class='skill-name'>Python</span>
+								<span class='skill-level expert'>Expert</span>
+							</div>
+							<div class='health-bar expert'>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment'></div>
+							</div>
+						</div>
+
+						<div class='skill-item'>
+							<div class='skill-header'>
+								<span class='skill-name'>Java</span>
+								<span class='skill-level advanced'>Advanced</span>
+							</div>
+							<div class='health-bar advanced'>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment'></div>
+								<div class='health-segment'></div>
+							</div>
+						</div>
+
+						<div class='skill-item'>
+							<div class='skill-header'>
+								<span class='skill-name'>SQL</span>
+								<span class='skill-level expert'>Expert</span>
+							</div>
+							<div class='health-bar advanced'>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment'></div>
+								<div class='health-segment'></div>
+							</div>
+						</div>
+
+						<div class='skill-item'>
+							<div class='skill-header'>
+								<span class='skill-name'>JavaScript</span>
+								<span class='skill-level beginner'>Beginner</span>
+							</div>
+							<div class='health-bar beginner'>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment'></div>
+								<div class='health-segment'></div>
+								<div class='health-segment'></div>
+							</div>
+						</div>
+					</div>
+
+					<div class='skill-category'>
+						<h3 class='category-title'>Data Engineering</h3>
+
+						<div class='skill-item'>
+							<div class='skill-header'>
+								<span class='skill-name'>Apache Spark</span>
+								<span class='skill-level expert'>Expert</span>
+							</div>
+							<div class='health-bar expert'>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment'></div>
+								<div class='health-segment'></div>
+							</div>
+						</div>
+
+						<div class='skill-item'>
+							<div class='skill-header'>
+								<span class='skill-name'>Apache Kafka</span>
+								<span class='skill-level advanced'>Advanced</span>
+							</div>
+							<div class='health-bar advanced'>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment'></div>
+								<div class='health-segment'></div>
+							</div>
+						</div>
+
+						<div class='skill-item'>
+							<div class='skill-header'>
+								<span class='skill-name'>Apache Airflow</span>
+								<span class='skill-level advanced'>Advanced</span>
+							</div>
+							<div class='health-bar advanced'>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment'></div>
+								<div class='health-segment'></div>
+								<div class='health-segment'></div>
+							</div>
+						</div>
+					</div>
+
+					<div class='skill-category'>
+						<h3 class='category-title'>Cloud & DevOps</h3>
+
+						<div class='skill-item'>
+							<div class='skill-header'>
+								<span class='skill-name'>AWS</span>
+								<span class='skill-level expert'>Expert</span>
+							</div>
+							<div class='health-bar expert'>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment'></div>
+								<div class='health-segment'></div>
+							</div>
+						</div>
+
+						<div class='skill-item'>
+							<div class='skill-header'>
+								<span class='skill-name'>Docker</span>
+								<span class='skill-level advanced'>Advanced</span>
+							</div>
+							<div class='health-bar advanced'>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment'></div>
+								<div class='health-segment'></div>
+							</div>
+						</div>
+
+						<div class='skill-item'>
+							<div class='skill-header'>
+								<span class='skill-name'>Kubernetes</span>
+								<span class='skill-level beginner'>Beginner</span>
+							</div>
+							<div class='health-bar beginner'>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment filled'></div>
+								<div class='health-segment'></div>
+								<div class='health-segment'></div>
+								<div class='health-segment'></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id='projects'>
+				<h2 class='section-title'>// Featured Projects</h2>
+				<div class='projects-grid'>
+					<div class='project-card'>
+						<h3>Real-time Data Pipeline</h3>
+						<p>
+							Architected and deployed a scalable real-time data pipeline processing over 10 million
+							events per day. Built using Apache Kafka for event streaming and Spark Streaming for
+							real-time processing, with data landing in AWS S3 and queryable via Athena.
+						</p>
+						<div class='project-tags'>
+							<span class='tag' title='Python'>
+								<img
+									src='https://cdn.simpleicons.org/python/00f3ff'
+									alt='Python'
+									width='24'
+									height='24'
+								/>
+							</span>
+							<span class='tag' title='Apache Kafka'>
+								<img
+									src='https://cdn.simpleicons.org/apachekafka/00f3ff'
+									alt='Kafka'
+									width='24'
+									height='24'
+								/>
+							</span>
+							<span class='tag' title='Apache Spark'>
+								<img
+									src='https://cdn.simpleicons.org/apachespark/00f3ff'
+									alt='Spark'
+									width='24'
+									height='24'
+								/>
+							</span>
+							<span class='tag' title='Google Cloud'>
+								<img
+									src='https://cdn.simpleicons.org/googlecloud/00f3ff'
+									alt='Google'
+									width='24'
+									height='24'
+								/>
+							</span>
+							<span class='tag' title='Docker'>
+								<img
+									src='https://cdn.simpleicons.org/docker/00f3ff'
+									alt='Docker'
+									width='24'
+									height='24'
+								/>
+							</span>
+						</div>
+						<a href='#' class='project-link'>View Project →</a>
+					</div>
+					<div class='project-card'>
+						<h3>Microservices API Platform</h3>
+						<p>
+							Built a high-performance microservices platform using FastAPI and Docker, handling
+							50k+ requests per minute. Implemented JWT authentication, rate limiting, and
+							comprehensive API documentation. Deployed on Kubernetes with auto-scaling
+							capabilities.
+						</p>
+						<div class='project-tags'>
+							<span class='tag' title='FastAPI'>
+								<img
+									src='https://cdn.simpleicons.org/fastapi/00f3ff'
+									alt='FastAPI'
+									width='24'
+									height='24'
+								/>
+							</span>
+							<span class='tag' title='PostgreSQL'>
+								<img
+									src='https://cdn.simpleicons.org/postgresql/00f3ff'
+									alt='PostgreSQL'
+									width='24'
+									height='24'
+								/>
+							</span>
+							<span class='tag' title='Redis'>
+								<img
+									src='https://cdn.simpleicons.org/redis/00f3ff'
+									alt='Redis'
+									width='24'
+									height='24'
+								/>
+							</span>
+							<span class='tag' title='Kubernetes'>
+								<img
+									src='https://cdn.simpleicons.org/kubernetes/00f3ff'
+									alt='Kubernetes'
+									width='24'
+									height='24'
+								/>
+							</span>
+							<span class='tag' title='Docker'>
+								<img
+									src='https://cdn.simpleicons.org/docker/00f3ff'
+									alt='Docker'
+									width='24'
+									height='24'
+								/>
+							</span>
+						</div>
+						<a href='#' class='project-link'>View Project →</a>
+					</div>
+
+					<div class='project-card'>
+						<h3>ML Model Deployment Pipeline</h3>
+						<p>
+							Created an end-to-end MLOps pipeline for model training, validation, and deployment.
+							Automated the entire workflow from data ingestion to model serving using Apache
+							Airflow, with models deployed as REST APIs and monitored for drift and performance
+							degradation.
+						</p>
+						<div class='project-tags'>
+							<span class='tag' title='Python'>
+								<img
+									src='https://cdn.simpleicons.org/python/00f3ff'
+									alt='Python'
+									width='24'
+									height='24'
+								/>
+							</span>
+							<span class='tag' title='MLflow'>
+								<img
+									src='https://cdn.simpleicons.org/mlflow/00f3ff'
+									alt='MLflow'
+									width='24'
+									height='24'
+								/>
+							</span>
+							<span class='tag' title='Apache Airflow'>
+								<img
+									src='https://cdn.simpleicons.org/apacheairflow/00f3ff'
+									alt='Airflow'
+									width='24'
+									height='24'
+								/>
+							</span>
+							<span class='tag' title='FastAPI'>
+								<img
+									src='https://cdn.simpleicons.org/fastapi/00f3ff'
+									alt='FastAPI'
+									width='24'
+									height='24'
+								/>
+							</span>
+							<span class='tag' title='Google Cloud'>
+								<img
+									src='https://cdn.simpleicons.org/googlecloud/00f3ff'
+									alt='Google'
+									width='24'
+									height='24'
+								/>
+							</span>
+						</div>
+						<a href='#' class='project-link'>View Project →</a>
+					</div>
+				</div>
+			</section>
+
+			<section id='blog'>
+				<h2 class='section-title'>// Recent Transmissions</h2>
+				<div class='blog-posts'>
+					{
+						recentPosts.map((post) => (
+							<article class='blog-post'>
+								<h3>{post.data.title}</h3>
+								<div class='blog-meta'>
+									Uploaded:{' '}
+									{post.data.pubDate.toLocaleDateString('en-US', {
+										year: 'numeric',
+										month: 'long',
+										day: 'numeric'
+									})}
+									{post.data.category && ` // Category: ${post.data.category}`}
+								</div>
+								<p>{post.data.description}</p>
+								<a href={`/post/${post.slug}`} class='read-more'>
+									Jack In →
+								</a>
+							</article>
+						))
+					}
+				</div>
+				<div style='text-align: center; margin-top: 40px;'>
+					<a href='/' class='read-more' style='font-size: 1.2rem;'>View All Transmissions →</a>
+				</div>
+			</section>
+
+			<footer>
+				<div class='social-links'>
+					<a href='https://github.com/oyamecodes' target='_blank' rel='noopener noreferrer'
+						>GitHub</a
+					>
+					<a
+						href='https://www.linkedin.com/in/oyame-mazaleni/'
+						target='_blank'
+						rel='noopener noreferrer'>LinkedIn</a
+					>
+					<a href='mailto:oyamemazaleni@gmail.com'>Email</a>
+				</div>
+				<p style='color: var(--text-secondary);'>© 2025 Oyame Mazaleni // Built in Night City</p>
+			</footer>
+		</div>
+	</body>
+</html>

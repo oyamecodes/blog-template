@@ -3,29 +3,114 @@
 @tailwind utilities;
 
 @layer base {
-	/* body {
-		transition: background-color 0.5s ease;
-	} */
+  :root {
+    --cyber-cyan: #00f3ff;
+    --cyber-magenta: #ff0080;
+    --cyber-gold: #ffed4e;
+    --dark-void: #0a0a0f;
+    --panel-bg: rgba(15, 15, 21, 0.9);
+  }
 
-	.prose code {
-		@apply text-base;
-	}
+  /* Dark mode - reduce brightness */
+  body {
+    @apply bg-[#0a0a0f];
+    font-family: 'Rajdhani', sans-serif;
+    color: #e0e0e0; /* Slightly dimmed from pure white */
+  }
 
-	/* prose styles here */
-	.prose h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		@apply text-zinc-800 dark:text-zinc-100   !important;
-	}
+  /* Light mode - ensure good contrast */
+  body.light {
+    @apply bg-white;
+    color: #1a1a1a;
+  }
 
-	html.dark .shiki,
-	html.dark .shiki span {
-	  color: var(--shiki-dark) !important;
-	  background-color: theme(colors.gray.900) !important;
-	}
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 0.05em;
+  }
+
+  /* Dark mode heading colors - less bright */
+  h1, h2, h3, h4, h5, h6 {
+    color: #d0d0d0;
+  }
+
+  /* Light mode heading colors */
+  body.light h1,
+  body.light h2,
+  body.light h3,
+  body.light h4,
+  body.light h5,
+  body.light h6 {
+    color: #2a2a2a;
+  }
+
+    .prose code {
+        @apply text-base;
+    }
+
+    /* Prose styles - better contrast */
+    .prose h1,
+    .prose h2,
+    .prose h3,
+    .prose h4,
+    .prose h5,
+    .prose h6 {
+        color: #d0d0d0 !important;
+    }
+
+    body.light .prose h1,
+    body.light .prose h2,
+    body.light .prose h3,
+    body.light .prose h4,
+    body.light .prose h5,
+    body.light .prose h6 {
+        color: #2a2a2a !important;
+    }
+
+    .prose p {
+        color: #b0b0b0;
+    }
+
+    body.light .prose p {
+        color: #4a4a4a;
+    }
+
+    .prose a {
+        @apply text-cyber-cyan hover:text-cyber-magenta;
+    }
+
+    body.light .prose a {
+        color: #0088cc;
+    }
+
+    body.light .prose a:hover {
+        color: #cc0066;
+    }
+
+    .prose li {
+        color: #b0b0b0;
+    }
+
+    body.light .prose li {
+        color: #4a4a4a;
+    }
+
+    .prose strong {
+        @apply text-white;
+    }
+
+    body.light .prose strong {
+        color: #1a1a1a;
+        font-weight: 700;
+    }
+
+    .prose img {
+        @apply rounded-lg;
+    }
+
+    .prose > :first-child {
+        margin-top: 0 !important;
+    }
 }
 
 .glass {
@@ -37,4 +122,106 @@
 
 .shadow {
 	box-shadow: -5px 3px 8px 1px rgba(0, 0, 0, 0.12);
+}
+
+@layer utilities {
+  /* Dark mode glow - reduced intensity */
+  .cyber-glow {
+    text-shadow: 0 0 8px rgba(0, 243, 255, 0.6), 0 0 15px rgba(0, 243, 255, 0.4);
+  }
+
+  /* Light mode - no glow, just solid color */
+  body.light .cyber-glow {
+    text-shadow: none;
+    color: #0088cc;
+  }
+  
+  .panel-border {
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+    border: 1px solid rgba(0, 243, 255, 0.25);
+  }
+
+  body.light .panel-border {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 136, 204, 0.3);
+  }
+
+  .scan-line {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .scan-line::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.3), transparent);
+    animation: scan 8s linear infinite;
+  }
+
+  body.light .scan-line::before {
+    display: none; /* Remove scan lines in light mode */
+  }
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+/* Light mode specific overrides */
+body.light {
+  /* Card backgrounds */
+  --panel-bg: rgba(255, 255, 255, 0.95);
+}
+
+body.light [class*="bg-dark-void"] {
+  background-color: #f5f5f5 !important;
+}
+
+body.light [class*="border-cyber-cyan"] {
+  border-color: #0088cc !important;
+}
+
+body.light [class*="text-cyber-cyan"] {
+  color: #0088cc !important;
+}
+
+body.light [class*="text-cyber-magenta"] {
+  color: #cc0066 !important;
+}
+
+body.light [class*="text-cyber-gold"] {
+  color: #cc9900 !important;
+}
+
+body.light [class*="hover:text-cyber-cyan"]:hover {
+  color: #0088cc !important;
+}
+
+body.light [class*="hover:text-cyber-magenta"]:hover {
+  color: #cc0066 !important;
+}
+
+/* Ensure icons are visible in light mode */
+body.light svg {
+  opacity: 0.85;
+}
+
+body.light svg:hover {
+  opacity: 1;
+}
+
+/* Light mode text colors */
+body.light .text-gray-400 {
+  color: #666666 !important;
+}
+
+body.light .text-white {
+  color: #1a1a1a !important;
+}
+
+body.light .text-gray-500 {
+  color: #888888 !important;
 }

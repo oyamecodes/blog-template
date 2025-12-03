@@ -1,18 +1,37 @@
 ---
 import { getCategories } from '@/utils'
-import Category from '@/components/Category'
-const categories = await getCategories()
+import { sluglify } from '@/utils'
 
+const categories = await getCategories()
 const { activeCategory } = Astro.props
 ---
 
-<div class='relative flex flex-wrap min-w-full gap-5'>
-	<Category />
+<div class='flex flex-wrap gap-3 mb-8'>
+	<a
+		href='/'
+		class={`px-5 py-2 rounded-sm border transition-all duration-300 font-rajdhani uppercase tracking-wider ${
+			!activeCategory
+				? 'bg-cyber-cyan text-dark-void border-cyber-cyan shadow-[0_0_15px_rgba(0,243,255,0.5)]'
+				: 'border-cyber-cyan/30 text-cyber-cyan hover:border-cyber-cyan hover:shadow-[0_0_10px_rgba(0,243,255,0.3)]'
+		}`}
+	>
+		All
+	</a>
 	{
-		categories.map((category: string) => (
-			<Category name={category} activeCategory={activeCategory} />
-		))
+		categories.map((category) => {
+			const categorySlug = sluglify(category.toLowerCase())
+			return (
+				<a
+					href={`/category/${categorySlug}/1`}
+					class={`px-5 py-2 rounded-sm border transition-all duration-300 font-rajdhani uppercase tracking-wider ${
+						activeCategory === categorySlug
+							? 'bg-cyber-magenta text-white border-cyber-magenta shadow-[0_0_15px_rgba(255,0,128,0.5)]'
+							: 'border-cyber-magenta/30 text-cyber-magenta hover:border-cyber-magenta hover:shadow-[0_0_10px_rgba(255,0,128,0.3)]'
+					}`}
+				>
+					{category}
+				</a>
+			)
+		})
 	}
-
-	<div class='hidden sm:block absolute w-full bottom-0 border-b-2 -z-40 dark:border-gray-600'></div>
 </div>

@@ -1,10 +1,30 @@
 ---
 import { siteConfig } from '@/site-config'
+import { SOCIALNETWORKS } from '@/data/links'
 
 const today = new Date()
 ---
 
-<footer class='flex justify-center items-center w-full px-16 h-28 border-t-2'>
-	&copy; {today.getFullYear()}
-	{siteConfig.author}. All rights reserved.
+<footer class='mt-24 border-t-2 border-cyber-cyan/30 pt-12 pb-8'>
+	<div class='flex flex-col items-center gap-6'>
+		<div class='flex gap-6'>
+			{
+				SOCIALNETWORKS.map((social) => (
+					<a
+						href={social.url}
+						target='_blank'
+						rel='noopener noreferrer'
+						class='text-cyber-cyan hover:text-cyber-magenta transition-colors duration-300 transform hover:scale-110'
+						aria-label={social.name}
+					>
+						<social.icon class='w-6 h-6' />
+					</a>
+				))
+			}
+		</div>
+		<div class='h-px w-48 bg-gradient-to-r from-transparent via-cyber-magenta to-transparent'></div>
+		<p class='text-gray-500 font-rajdhani text-sm tracking-wider'>
+			© {today.getFullYear()} // BUILT IN NIGHT CITY
+		</p>
+	</div>
 </footer>

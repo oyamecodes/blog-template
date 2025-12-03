@@ -1,9 +1,9 @@
 ---
 import type { CollectionEntry } from 'astro:content'
-import PostCard from '@/components/PostCard'
-import { cn } from '@/utils'
+import FormattedDate from './FormattedDate.astro'
+import { Image } from 'astro:assets'
 
-type Props = {
+interface Props {
 	posts: CollectionEntry<'blog'>[]
 	FirstBig?: boolean
 }
@@ -11,24 +11,44 @@ type Props = {
 const { posts, FirstBig = false } = Astro.props
 ---
 
-<section
-	class={cn(
-		`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-8 mt-3`,
-		FirstBig && `md:[&>*:first-child]:col-span-2`
-	)}
->
+<div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8'>
 	{
-		posts.map(async (post) => {
-			const { remarkPluginFrontmatter } = await post.render()
+		posts.map((post, index) => (
+			<article
+				class={`panel-border bg-panel-bg rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-cyber-cyan/40 ${FirstBig && index === 0 ? 'md:col-span-2 lg:col-span-3' : ''}`}
+			>
+				{post.data.heroImage && (
+					<Image
+						src={post.data.heroImage}
+						alt={post.data.title}
+						width={800}
+						height={400}
+						class='w-full h-48 object-cover'
+					/>
+				)}
 
-			return (
-				<PostCard
-					id={post.id}
-					data={post.data}
-					slug={post.slug}
-					readTime={remarkPluginFrontmatter.minutesRead}
-				/>
-			)
-		})
+				<div class='p-6'>
+					<div class='flex items-center gap-2 mb-3 text-sm font-rajdhani'>
+						<span class='text-cyber-cyan'>UPLOADED:</span>
+						<FormattedDate date={post.data.pubDate} />
+						<span class='text-cyber-magenta ml-auto'>//</span>
+						<span class='text-cyber-gold uppercase'>{post.data.category}</span>
+					</div>
+
+					<h3 class='font-orbitron text-xl mb-3 text-white hover:text-cyber-cyan transition-colors'>
+						<a href={`/post/${post.slug}`}>{post.data.title}</a>
+					</h3>
+
+					<p class='text-white/60 mb-4 line-clamp-3'>{post.data.description}</p>
+
+					<a
+						href={`/post/${post.slug}`}
+						class='inline-block text-cyber-cyan font-rajdhani uppercase tracking-wider hover:text-cyber-magenta transition-colors'
+					>
+						Jack In →
+					</a>
+				</div>
+			</article>
+		))
 	}
-</section>
+</div>

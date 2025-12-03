@@ -3,7 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout'
 import ListPosts from '@/components/ListPosts'
 import ListCategories from '@/components/ListCategories'
 import TitlePage from '@/components/TitlePage'
-import { sluglify, unsluglify, getCategories, getPosts } from '@/utils'
+import { sluglify, getCategories, getPosts } from '@/utils'
 import { siteConfig } from '@/data/site.config'
 import Pagination from '@/components/Pagination'
 
@@ -12,26 +12,30 @@ export async function getStaticPaths({ paginate }: any) {
 	const allPosts = await getPosts()
 
 	return categories.flatMap((category: string) => {
-		const unsluglifyNameCategory = unsluglify(category!.toLowerCase())
+		const categorySlug = sluglify(category.toLowerCase())
+
+		// Filter posts by comparing the slugified versions
 		const filteredPosts = allPosts.filter(
-			(post) => post.data.category.toLowerCase() === unsluglifyNameCategory
+			(post) => sluglify(post.data.category.toLowerCase()) === categorySlug
 		)
 
 		return paginate(filteredPosts, {
 			params: {
-				category: sluglify(category.toLowerCase())
+				category: categorySlug
 			},
 			pageSize: siteConfig.paginationSize
 		})
 	})
 }
+
 const params = Astro.params
 const { page } = Astro.props
 
-const unsluglifyNameCategory = unsluglify(params.category!.toLowerCase())
-const categoryName = (await getCategories()).find(
-	(category) => category.toLowerCase() === unsluglifyNameCategory
-)
+// Find the actual category name by matching the slug
+const categories = await getCategories()
+const categoryName =
+	categories.find((cat) => sluglify(cat.toLowerCase()) === params.category) || params.category
+
 const posts = page.data
 ---
 
