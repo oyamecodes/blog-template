@@ -582,18 +582,40 @@ const recentPosts = await getPosts(3)
 				}
 
 				const animateTerminal = async () => {
+					console.log('🎬 Starting terminal animation')
 					for (let i = 0; i < terminalLines.length; i++) {
-						const p = terminalLines[i].querySelector('p')
+						const line = terminalLines[i]
+						const p = line.querySelector('p')
+
 						if (p && originalTexts[i]) {
-							await typeText(p, originalTexts[i], 15)
-							await new Promise((resolve) => setTimeout(resolve, 300))
+							// Make visible and add animated class
+							line.classList.add('animated')
+							line.style.animation = 'fadeInLine 0.3s forwards'
+
+							await new Promise((resolve) => setTimeout(resolve, 400))
+							await typeText(p, originalTexts[i], 20)
+							await new Promise((resolve) => setTimeout(resolve, 500))
 						}
 					}
 				}
 
-				setTimeout(() => {
-					animateTerminal()
-				}, 500)
+				// Start animation when bio section is in view
+				const observer = new IntersectionObserver(
+					(entries) => {
+						entries.forEach((entry) => {
+							if (entry.isIntersecting) {
+								animateTerminal()
+								observer.unobserve(entry.target)
+							}
+						})
+					},
+					{ threshold: 0.3 }
+				)
+
+				const bioSection = document.querySelector('.bio')
+				if (bioSection) {
+					observer.observe(bioSection)
+				}
 			})
 		</script>
 	</body>
