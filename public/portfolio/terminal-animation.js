@@ -1,5 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+	console.log('🔧 Terminal animation script loaded')
+
 	const terminalLines = document.querySelectorAll('.terminal-line')
+	console.log(`📝 Found ${terminalLines.length} terminal lines`)
 
 	// Store original text
 	const originalTexts = Array.from(terminalLines).map((line) => {
@@ -36,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Animate lines sequentially
 	const animateTerminal = async () => {
+		console.log('🎬 Starting terminal animation')
 		for (let i = 0; i < terminalLines.length; i++) {
 			const line = terminalLines[i]
 			const p = line.querySelector('p')
