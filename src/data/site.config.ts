@@ -10,7 +10,7 @@ interface SiteConfig {
 }
 
 export const siteConfig: SiteConfig = {
-	site: 'https://blog-template-gray.vercel.app/', // Write here your website url
+	site: 'https://oyamemazaleni.co.za',
 	author: 'Oyame Mazaleni', // Site author
 	title: 'DevJourney by Oyame', // Site title.
 	description:
