@@ -544,6 +544,10 @@ const recentPosts = await getPosts(3)
 			</footer>
 		</div>
 
-		<script is:inline src='/portfolio/terminal-animation.js'></script>
+		<script is:inline>
+			const script = document.createElement('script')
+			script.src = '/portfolio/terminal-animation.js'
+			document.body.appendChild(script)
+		</script>
 	</body>
 </html>
