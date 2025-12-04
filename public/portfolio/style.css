@@ -184,7 +184,7 @@ nav a[target="_blank"]::after {
 /* Hero Section */
 .hero {
     text-align: center;
-    padding: 100px 20px;
+    padding: 60px 20px;
     position: relative;
     background: transparent; /* Match website background */
 }
