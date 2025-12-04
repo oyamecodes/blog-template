@@ -46,24 +46,7 @@ body::before {
 
 /* Hero flow overlay (covers the whole hero and animates) */
 .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1; /* above body overlay but below hero content */
-    background:
-        linear-gradient(90deg, rgba(0,243,255,0.04) 0%, rgba(255,0,128,0.03) 25%, rgba(255,237,78,0.03) 50%, rgba(0,243,255,0.04) 75%, rgba(255,0,128,0.03) 100%),
-        repeating-linear-gradient(
-            0deg,
-            transparent,
-            transparent 2px,
-            rgba(0, 243, 255, 0.03) 2px,
-            rgba(0, 243, 255, 0.03) 4px
-        );
-    background-size: 200% 100%, 100% 100%;
-    animation: flow 10s linear infinite, scanlines 8s linear infinite;
-    mix-blend-mode: overlay;
-    opacity: 0.95;
+    display: none;
 }
 
 /* Make sure hero content sits above the overlay */
@@ -203,6 +186,7 @@ nav a[target="_blank"]::after {
     text-align: center;
     padding: 100px 20px;
     position: relative;
+    background: transparent; /* Match website background */
 }
 
 .hero h1 {
@@ -241,11 +225,23 @@ nav a[target="_blank"]::after {
     display: flex;
     gap: 20px;
     align-items: flex-start;
-    padding: 20px 0;
-    border-left: 2px solid rgba(0,243,255,0.18);
+    padding: 20px;
+    border-left: 2px solid rgba(0,243,255,0.3);
     padding-left: 30px;
     position: relative;
-    opacity: 0; /* Start hidden */
+    opacity: 0;
+    
+    /* Add background only to terminal lines */
+    background: rgba(21, 21, 31, 0.6);
+    border-radius: 8px;
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.terminal-line:hover {
+    background: rgba(21, 21, 31, 0.8);
+    border-color: rgba(0, 243, 255, 0.4);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
 }
 
 .terminal-line:nth-child(1) {
@@ -263,9 +259,11 @@ nav a[target="_blank"]::after {
 @keyframes fadeInLine {
     from {
         opacity: 0;
+        transform: translateY(20px);
     }
     to {
         opacity: 1;
+        transform: translateY(0);
     }
 }
 
@@ -871,28 +869,375 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2.5rem;
+    /* Container */
+    .container {
+        padding: 10px;
     }
-    
-    .hero .subtitle {
-        font-size: 1.2rem;
+
+    /* Header/Nav */
+    header {
+        padding: 20px 0;
+        margin-bottom: 30px;
     }
-    
-    .nav-links {
+
+    nav {
         flex-direction: column;
         gap: 15px;
     }
-    
-    .projects-grid {
-        grid-template-columns: 1fr;
+
+    .logo {
+        font-size: 1.5rem;
     }
 
-    .skills-container {
-        grid-template-columns: 1fr;
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    /* Hero Section */
+    .hero {
+        padding: 60px 10px;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+    }
+
+    .hero .subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    /* Bio Terminal Lines */
+    .bio {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    .terminal-line {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .prompt {
+        font-size: 0.9rem;
+        min-width: auto;
+    }
+
+    .terminal-line p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    /* Sections */
+    section {
+        margin: 50px 0;
     }
 
     .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+    }
+
+    /* Elevator Pitch Video */
+    .video-container {
+        aspect-ratio: 16 / 9;
+    }
+
+    .play-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .video-label {
+        font-size: 1rem;
+    }
+
+    .video-status {
+        font-size: 0.8rem;
+    }
+
+    /* Skills Section */
+    .skills-container {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .skill-category {
+        padding: 20px;
+    }
+
+    .category-title {
+        font-size: 1.1rem;
+        margin-bottom: 20px;
+    }
+
+    .skill-item {
+        margin-bottom: 20px;
+    }
+
+    .skill-name {
+        font-size: 0.9rem;
+    }
+
+    .skill-level {
+        font-size: 0.7rem;
+        padding: 3px 8px;
+    }
+
+    .health-bar {
+        height: 16px;
+        gap: 3px;
+    }
+
+    /* Projects Section */
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .project-card {
+        padding: 20px;
+    }
+
+    .project-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+
+    .project-card p {
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+
+    .project-tags {
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    .tag {
+        padding: 6px;
+    }
+
+    .tag img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .project-link {
+        font-size: 0.85rem;
+        padding: 8px 16px;
+    }
+
+    /* Blog Posts */
+    .blog-posts {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .blog-post {
+        padding: 20px;
+    }
+
+    .blog-post h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+
+    .blog-meta {
+        font-size: 0.8rem;
+        margin-bottom: 12px;
+    }
+
+    .blog-post p {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    .read-more {
+        font-size: 0.85rem;
+        padding: 8px 16px;
+    }
+
+    /* Footer */
+    footer {
+        padding: 30px 0;
+        margin-top: 50px;
+    }
+
+    .social-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .social-links a {
+        font-size: 0.9rem;
+    }
+}
+
+/* Extra small devices (phones in portrait mode) */
+@media (max-width: 480px) {
+    .hero h1 {
         font-size: 2rem;
+        letter-spacing: 2px;
+    }
+
+    .hero .subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+
+    .terminal-line {
+        padding: 12px;
+    }
+
+    .terminal-line p {
+        font-size: 0.85rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .project-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .skill-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .health-bar {
+        height: 14px;
+    }
+
+    /* Make tags wrap better on very small screens */
+    .project-tags {
+        gap: 6px;
+    }
+
+    .tag {
+        padding: 5px;
+    }
+
+    .tag img {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* Landscape orientation on phones */
+@media (max-width: 768px) and (orientation: landscape) {
+    .hero {
+        padding: 40px 10px;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    section {
+        margin: 40px 0;
+    }
+}
+
+/* Tablet devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .container {
+        max-width: 90%;
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+    }
+
+    .skills-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .blog-posts {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Touch device improvements */
+@media (hover: none) and (pointer: coarse) {
+    /* Larger touch targets */
+    .nav-links a {
+        padding: 12px;
+        font-size: 1rem;
+    }
+
+    .project-link,
+    .read-more {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+
+    /* Remove hover effects on touch devices */
+    .terminal-line:hover {
+        background: rgba(21, 21, 31, 0.6);
+        border-color: rgba(0, 243, 255, 0.2);
+        box-shadow: none;
+        transform: none;
+    }
+
+    .project-card:hover {
+        transform: none;
+    }
+
+    .skill-category:hover {
+        transform: none;
+    }
+
+    /* Better tap feedback */
+    .nav-links a:active,
+    .project-link:active,
+    .read-more:active {
+        opacity: 0.7;
+        transform: scale(0.98);
+    }
+}
+
+/* Prevent horizontal scroll on mobile */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .container {
+        overflow-x: hidden;
+    }
+
+    /* Make sure images don't overflow */
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* Adjust scan line animation for mobile */
+    .scan-effect {
+        opacity: 0.3;
     }
 }
