@@ -229,13 +229,19 @@ nav a[target="_blank"]::after {
     border-left: 2px solid rgba(0,243,255,0.3);
     padding-left: 30px;
     position: relative;
-    opacity: 0;
     
-    /* Add background only to terminal lines */
+    /* 👇 Changed from opacity: 0 to this */
+    visibility: hidden; /* Use visibility instead of opacity */
+    
     background: rgba(21, 21, 31, 0.6);
     border-radius: 8px;
     border: 1px solid rgba(0, 243, 255, 0.2);
     backdrop-filter: blur(10px);
+}
+
+/* 👇 Add this new rule */
+.terminal-line.animated {
+    visibility: visible;
 }
 
 .terminal-line:hover {
