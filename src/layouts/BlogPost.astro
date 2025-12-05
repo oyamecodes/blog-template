@@ -26,9 +26,13 @@ const articleDate = pubDate.toISOString()
 	articleDate={articleDate}
 >
 	<article class='min-w-full scan-line'>
-		<header class='mb-8 flex flex-col gap-6 panel-border bg-panel-bg p-8 rounded-lg'>
-			<div class='flex flex-col gap-3'>
-				<div class='flex items-center justify-center gap-4 font-rajdhani text-sm text-cyber-cyan'>
+		<header
+			class='mb-6 sm:mb-8 flex flex-col gap-4 sm:gap-6 panel-border bg-panel-bg p-4 sm:p-8 rounded-lg'
+		>
+			<div class='flex flex-col gap-2 sm:gap-3'>
+				<div
+					class='flex flex-wrap items-center justify-center gap-2 sm:gap-4 font-rajdhani text-xs sm:text-sm text-cyber-cyan'
+				>
 					<span>UPLOADED:</span>
 					<FormattedDate date={pubDate} />
 					<span class='text-cyber-magenta'>//</span>
@@ -36,15 +40,17 @@ const articleDate = pubDate.toISOString()
 						{readTime}
 					</span>
 				</div>
-				<h1 class='text-center font-orbitron text-4xl md:text-6xl font-bold text-white cyber-glow'>
+				<h1
+					class='text-center font-orbitron text-2xl sm:text-4xl md:text-6xl font-bold text-white cyber-glow'
+				>
 					{title}
 				</h1>
 			</div>
 
-			<div class='flex flex-wrap justify-center gap-3'>
+			<div class='flex flex-wrap justify-center gap-2 sm:gap-3'>
 				{
 					tags.map((tag) => (
-						<span class='px-4 py-1 rounded-full border border-cyber-cyan/50 bg-cyber-cyan/10 text-cyber-cyan uppercase text-sm tracking-wider'>
+						<span class='px-2 sm:px-4 py-0.5 sm:py-1 rounded-full border border-cyber-cyan/50 bg-cyber-cyan/10 text-cyber-cyan uppercase text-xs sm:text-sm tracking-wider'>
 							{tag}
 						</span>
 					))

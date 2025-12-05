@@ -6,32 +6,35 @@ const categories = await getCategories()
 const { activeCategory } = Astro.props
 ---
 
-<div class='flex flex-wrap gap-3 mb-8'>
-	<a
-		href='/'
-		class={`px-5 py-2 rounded-sm border transition-all duration-300 font-rajdhani uppercase tracking-wider ${
-			!activeCategory
-				? 'bg-cyber-cyan text-dark-void border-cyber-cyan shadow-[0_0_15px_rgba(0,243,255,0.5)]'
-				: 'border-cyber-cyan/30 text-cyber-cyan hover:border-cyber-cyan hover:shadow-[0_0_10px_rgba(0,243,255,0.3)]'
-		}`}
-	>
-		All
-	</a>
-	{
-		categories.map((category) => {
-			const categorySlug = sluglify(category.toLowerCase())
-			return (
-				<a
-					href={`/category/${categorySlug}/1`}
-					class={`px-5 py-2 rounded-sm border transition-all duration-300 font-rajdhani uppercase tracking-wider ${
-						activeCategory === categorySlug
-							? 'bg-cyber-magenta text-white border-cyber-magenta shadow-[0_0_15px_rgba(255,0,128,0.5)]'
-							: 'border-cyber-magenta/30 text-cyber-magenta hover:border-cyber-magenta hover:shadow-[0_0_10px_rgba(255,0,128,0.3)]'
-					}`}
-				>
-					{category}
-				</a>
-			)
-		})
-	}
+<div class='-mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto pb-2 scrollbar-hide'>
+	<div class='flex items-center gap-2 sm:gap-3 snap-x snap-mandatory'>
+		<a
+			href='/'
+			class={`inline-flex min-w-max px-3 sm:px-5 py-1.5 sm:py-2 rounded-sm border transition-all duration-300 font-rajdhani uppercase tracking-wider text-sm sm:text-base whitespace-nowrap ${
+				!activeCategory
+					? 'bg-cyber-cyan text-dark-void border-cyber-cyan shadow-[0_0_15px_rgba(0,243,255,0.5)]'
+					: 'border-cyber-cyan/30 text-cyber-cyan hover:border-cyber-cyan hover:shadow-[0_0_10px_rgba(0,243,255,0.3)]'
+			} snap-start`}
+			aria-label='All categories'
+		>
+			All
+		</a>
+		{
+			categories.map((category) => {
+				const categorySlug = sluglify(category.toLowerCase())
+				return (
+					<a
+						href={`/category/${categorySlug}/1`}
+						class={`inline-flex min-w-max px-3 sm:px-5 py-1.5 sm:py-2 rounded-sm border transition-all duration-300 font-rajdhani uppercase tracking-wider text-sm sm:text-base whitespace-nowrap snap-start ${
+							activeCategory === categorySlug
+								? 'bg-cyber-magenta text-white border-cyber-magenta shadow-[0_0_15px_rgba(255,0,128,0.5)]'
+								: 'border-cyber-magenta/30 text-cyber-magenta hover:border-cyber-magenta hover:shadow-[0_0_10px_rgba(255,0,128,0.3)]'
+						}`}
+					>
+						{category}
+					</a>
+				)
+			})
+		}
+	</div>
 </div>

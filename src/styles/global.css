@@ -125,6 +125,36 @@
 }
 
 @layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .astro-code,
+  .shiki,
+  pre.astro-code {
+    filter: brightness(1.3) !important;
+  }
+  
+  .astro-code span,
+  .shiki span {
+    filter: brightness(1.4);
+  }
+  
+  body.light .astro-code,
+  body.light .shiki,
+  body.light pre.astro-code {
+    filter: brightness(1) !important;
+  }
+  
+  body.light .astro-code span,
+  body.light .shiki span {
+    filter: brightness(1);
+  }
+  
   /* Dark mode glow - reduced intensity */
   .cyber-glow {
     text-shadow: 0 0 8px rgba(0, 243, 255, 0.6), 0 0 15px rgba(0, 243, 255, 0.4);
@@ -151,14 +181,14 @@
     overflow: hidden;
   }
   
-  .scan-line::before {
+  /* .scan-line::before {
     content: '';
     position: absolute;
     width: 100%;
     height: 2px;
     background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.3), transparent);
     animation: scan 8s linear infinite;
-  }
+  } */
 
   body.light .scan-line::before {
     display: none; /* Remove scan lines in light mode */

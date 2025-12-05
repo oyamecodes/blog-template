@@ -3,16 +3,28 @@ import { MENU_LINKS } from '@/data/constants'
 ---
 
 <header class='relative z-50 border-b border-cyber-cyan/30 bg-dark-void/80 backdrop-blur-sm'>
-	<nav class='mx-auto max-w-6xl px-5 py-4'>
+	<nav class='mx-auto max-w-6xl px-4 sm:px-5 py-4'>
 		<div class='flex items-center justify-between'>
 			<a
 				href='/'
-				class='font-orbitron text-2xl font-bold text-cyber-cyan hover:opacity-80 transition-opacity'
+				class='font-orbitron text-xl sm:text-2xl font-bold text-cyber-cyan hover:opacity-80 transition-opacity'
 			>
 				NR://BLOG
 			</a>
 
-			<ul class='flex items-center gap-6'>
+			<!-- Mobile menu button -->
+			<button id='mobile-menu-btn' class='md:hidden p-2 text-cyber-cyan' aria-label='Toggle menu'>
+				<svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+					<path
+						stroke-linecap='round'
+						stroke-linejoin='round'
+						stroke-width='2'
+						d='M4 6h16M4 12h16M4 18h16'></path>
+				</svg>
+			</button>
+
+			<!-- Desktop menu -->
+			<ul class='hidden md:flex items-center gap-6'>
 				{
 					MENU_LINKS.map((link) => (
 						<li>
@@ -28,5 +40,31 @@ import { MENU_LINKS } from '@/data/constants'
 				}
 			</ul>
 		</div>
+
+		<!-- Mobile menu -->
+		<ul id='mobile-menu' class='hidden md:hidden flex-col gap-4 pt-4 pb-2'>
+			{
+				MENU_LINKS.map((link) => (
+					<li>
+						<a
+							href={link.path}
+							class='block font-rajdhani text-lg uppercase tracking-wider text-white/70 hover:text-cyber-cyan transition-colors duration-300 py-2'
+						>
+							{link.title}
+						</a>
+					</li>
+				))
+			}
+		</ul>
 	</nav>
 </header>
+
+<script>
+	const btn = document.getElementById('mobile-menu-btn')
+	const menu = document.getElementById('mobile-menu')
+
+	btn?.addEventListener('click', () => {
+		menu?.classList.toggle('hidden')
+		menu?.classList.toggle('flex')
+	})
+</script>
